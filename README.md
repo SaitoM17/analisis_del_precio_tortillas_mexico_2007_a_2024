@@ -27,7 +27,7 @@ Analizar la evolución del precio de las tortillas en México desde 2007 hasta 2
 ## 📦 Conjunto de Datos
 
 El conjunto de datos utilizado contiene las siguientes columnas:
-
+tortilla_price.csv:
 - `State`: Estado de México donde se ubica la ciudad, los 32 estados de México están incluidos en el conjunto de datos.
 - `City`: Principales ciudades de México donde se realizan escuentas de precios.
 - `Year`: Año correspondiente a la observación.
@@ -35,9 +35,8 @@ El conjunto de datos utilizado contiene las siguientes columnas:
 - `Day`: Día correspondiente a la observación.
 - `Store type`: Tipo de teinda de los precios encuentados (puede ser una tienda familiar o una gran tienda minorista).
 - `Price per kilogram`: Estimación de precios para el tipo de tienda, día y ciudad encuestada.
-- `...`
 
-Fuente: [Nombre de la fuente o “datos simulados/ficticios”].
+Fuente: https://www.kaggle.com/datasets/richave/tortilla-prices-in-mexico.
 
 ---
 
@@ -69,8 +68,7 @@ Fuente: [Nombre de la fuente o “datos simulados/ficticios”].
 - Pandas
 - Matplotlib
 - Seaborn
-- Jupyter Notebook / Google Colab
-- [Otras herramientas que uses, como Scikit-learn, Plotly, etc.]
+- Jupyter Notebook
 
 ---
 
