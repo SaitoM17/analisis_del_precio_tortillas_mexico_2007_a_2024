@@ -1,5 +1,5 @@
-# 📊 Anáisis del Precio de las tortillas en México 2007 - 2024
-# [Título del Análisis]
+# 📊 Precio de las tortillas en México
+# Análisis del Precio de las Tortillas en México 2007 - 2024
 
 Este proyecto realiza un análisis [exploratorio / predictivo / descriptivo] de [tema del proyecto]. El conjunto de datos incluye información sobre [breve descripción del contenido del dataset].
 
@@ -9,7 +9,7 @@ Este proyecto realiza un análisis [exploratorio / predictivo / descriptivo] de 
 
 - [🎯 Propósito](#-propósito)
 - [📦 Conjunto de Datos](#-conjunto-de-datos)
-- [🧪 Pasos del Proyecto](#-pasos-del-proyecto)
+- [🧪 Desarrollo del Proyecto](#-desarrollo-del-proyecto)
 - [🛠️ Tecnologías](#-tecnologías)
 - [⚙️ Instalación](#-instalación)
 - [🚀 Uso](#-uso)
@@ -41,24 +41,141 @@ Fuente: https://www.kaggle.com/datasets/richave/tortilla-prices-in-mexico.
 
 ---
 
-## 🧪 Pasos del Proyecto
+## 🧪 Desarrollo del Proyecto
 
-1. **Carga y exploración inicial de los datos**:
-   - Exploración básica con `.head()`, `.info()`, `.describe()`, etc.
+### **Carga y exploración inicial de los datos**
+El proyecto comenzó con la obtención del conjunto de datos sobre los precios de la tortilla de maíz en México desde el año 2007 hasta el 2024, publicado en kaggle por 
+*Rick Chavelas*. Se realizó una exploración preliminar para entender la estructura del dataset, la cantidad de registros, las variables disponibles, y la granularidad temporal y geográfica. Esta fase incluyó el uso de funciones como `.head()`, `.info()` y `.describe()` para detectar inconsistencias básicas y comprender las dimensiones generales del problema.
 
-2. **Limpieza y preprocesamiento**:
-   - Manejo de valores nulos, duplicados, formatos y conversiones de fechas.
+El problema identificando fue la falta de datos en la columna Price per kilogram
+```python 
+# Identificar valores nulos
+print('Identificar Valores Nulos por Columnas')
+valores_nulos = df_tortilla_price.isnull().sum()
+print(valores_nulos)
+```
+```
+Identificar Valores Nulos por Columnas
+State                    0
+City                     0
+Year                     0
+Month                    0
+Day                      0
+Store type               0
+Price per kilogram    6390
+dtype: int64
+```
+***Archivo: 1_EDA.ipynb***
 
-3. **Análisis exploratorio de datos (EDA)**:
+### **Limpieza y preprocesamiento**
+En la limpieza de los datos el un único problema crítico es: la presencia de valores nulos en la columna Price per kilogram. Debido a su relevancia central para el análisis, se decidió eliminar esos registros para mantener la integridad estadística del estudio. Otras columnas como las fechas y entidades se dejaron intactas en esta fase, ya que no presentaban problemas estructurales, y serían transformadas más adelante cuando fuera necesario.
+
+Código para verificar la cantidad de filas y columnas
+```python
+# Verificar la cantidad de filas y columnas 
+num_fias, num_columnas = df_tortilla_prices.shape
+print(f'Número de filas: {num_fias}\nNúmero de columnas: {num_columnas}')
+```
+Salida:
+```bash
+Número de filas: 289146
+Número de columnas: 7
+```
+
+Código para eliminar las filas con valores nulos:
+```python
+# Eliminar las filas con los valores nulos
+df_tortilla_prices_sin_nulos = df_tortilla_prices.dropna()
+
+# Verificar la cantidad de filas y columnas
+num_filas_sin_nulos, num_columnas_sin_nulos = df_tortilla_prices_sin_nulos.shape
+print(f'Número de filas: {num_filas_sin_nulos}\nNúmero de columnas: {num_columnas_sin_nulos}')
+```
+Salida:
+```bash
+Número de filas: 282756
+Número de columnas: 7
+```
+
+Para finalizar la limpieza y preprocesamiento de los datos se guardaron los datos sin valores nulos en un nuevo archivo csv.
+```python
+df_tortilla_prices_sin_nulos.to_csv('../data/processed/tortilla_prices_sin_nulos.csv', index=False)
+```
+***Archivo: 2_limpieza_datos.ipynb***
+
+### **Análisis exploratorio de datos (EDA)**
+Con los datos limpios, se procedió a realizar un análisis exploratorio profundo para entender la distribución y evolución de los precios a lo largo del tiempo. Entre los principales hallazgos:
+
+Se observó una tendencia general al alza en los precios promedio anuales de la tortilla.
+
+![tendencia_general_evolución_precio_promedio_anual_tortilla_mexico_2007_a_2024](reports/figures/tendencia_general_evolución_precio_promedio_anual_tortilla_mexico_2007_a_2024.png)
+
+Algunas entidades federativas destacan la presencia de precios sistemáticamente más altos y mínimos que otras, destacando diferencias regionales en 2007 y 2024.
+
+Código:
+```python
+min_state_2007 = promedio_state_2007.idxmin()
+min_precio_state_2007 = promedio_state_2007[min_state_2007]
+
+max_state_2007 = promedio_state_2007.idxmax()
+max_precio_state_2007 = promedio_state_2007[max_state_2007]
+
+
+print('Esatdo del 2007 con precios Mínimos')
+print(f'{"Estado":<11} Precio \n{min_state_2007:<11} ${min_precio_state_2007:.2f}')
+
+print('\nEsatdo del 2007 con precios Máximos')
+print(f'{"Estado":<11} Precio \n{max_state_2007:<11} ${max_precio_state_2007:.2f}')
+```
+Salida:
+```bash
+Estados del 2007 con precios Mínimos
+Estado      Precio 
+Oaxaca      $6.81
+
+Estados del 2007 con precios Máximos
+Estado      Precio 
+Sonora      $8.56
+```
+Código:
+```python
+min_state_2024 = promedio_state_2024.idxmin()
+min_precio_state_2024 = promedio_state_2024[min_state_2024]
+
+max_state_2024 = promedio_state_2024.idxmax()
+max_precio_state_2024 = promedio_state_2024[max_state_2024]
+
+print('\nEsatdo del 2024 con precios Mínimos')
+print(f'{"Estado":<11} Precio \n{min_state_2024:<11} ${min_precio_state_2024:.2f}')
+
+print('\nEsatdo del 2007 con precios Máximos')
+print(f'{"Estado":<11} Precio \n{max_state_2024:<11} ${max_precio_state_2024:.2f}')
+```
+Salida:
+```bash
+Estados del 2024 con precios Mínimos
+Estado      Precio 
+Tlaxcala    $15.35
+
+Estados del 2007 con precios Máximos
+Estado      Precio 
+Sonora      $21.89
+```
+
+La dispersión de precios también ha crecido con el tiempo, lo que indica un mercado cada vez más heterogéneo en cuanto a costos.
+
+Se usaron funciones como .groupby(), .mean() y .std() para obtener promedios y desviaciones estándar por año y por estado, y así facilitar el análisis comparativo.
+
+4. **Análisis exploratorio de datos (EDA)**:
    - [Ej. Distribución, correlaciones, agrupaciones, etc.]
 
-4. **Visualización de datos**:
+5. **Visualización de datos**:
    - Uso de gráficos de barras, líneas, cajas, dispersión y mapas de calor.
 
-5. **Modelado o reportes (opcional)**:
+6. **Modelado o reportes (opcional)**:
    - [Si aplica: modelos de ML, clustering, predicciones, etc.]
 
-6. **Conclusiones y recomendaciones**:
+7. **Conclusiones y recomendaciones**:
    - Síntesis de hallazgos clave y propuestas de acción.
 
 ---
