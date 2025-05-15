@@ -14,7 +14,8 @@ Este proyecto realiza un análisis [exploratorio / predictivo / descriptivo] de 
 - [⚙️ Instalación](#-instalación)
 - [🚀 Uso](#-uso)
 - [📈 Conclusiones y Recomendaciones](#-conclusiones-y-recomendaciones)
-- [👤 Autores](#-autores)
+- [👤 Autor](#-autor)
+- [📝 Licencia](#-licencia)
 
 ---
 
