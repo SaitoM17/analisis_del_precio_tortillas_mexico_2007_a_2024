@@ -1,7 +1,7 @@
 # 📊 Precio de las tortillas en México
 # Análisis del Precio de las Tortillas en México 2007 - 2024
 
-Este proyecto realiza un análisis [exploratorio / predictivo / descriptivo] de [tema del proyecto]. El conjunto de datos incluye información sobre [breve descripción del contenido del dataset].
+Este proyecto realiza un análisis exploratorio y descriptivo del precio de la tortilla en México. El conjunto de datos incluye información detallada sobre el precio por kilogramo de la tortilla en diversas ubicaciones (estados y ciudades) y tipos de tiendas a lo largo del tiempo, abarcando el periodo 2007-2024. 
 
 ---
 
@@ -12,8 +12,6 @@ Este proyecto realiza un análisis [exploratorio / predictivo / descriptivo] de 
 - [🧪 Desarrollo del Proyecto](#-desarrollo-del-proyecto)
 - [🛠️ Tecnologías](#-tecnologías)
 - [⚙️ Instalación](#-instalación)
-- [🚀 Uso](#-uso)
-- [📈 Conclusiones y Recomendaciones](#-conclusiones-y-recomendaciones)
 - [👤 Autor](#-autor)
 - [📝 Licencia](#-licencia)
 
@@ -204,6 +202,47 @@ El precio promedio mensual de la tortilla, promediado entre 2007 y 2024, present
 
 ![precio_promedio_mensual_tortilla_todos_los_años](reports/figures/precio_promedio_mensual_tortilla_todos_los_años.png)
 
+![distribucion_precio_tortilla_por_mes](reports/figures/distribucion_precio_tortilla_por_mes.png)
+
+### **Formulación y prueba de hipótesis**
+
+**Hipótesis 1:**  *"El precio promedio de la tortilla ha aumentado significativamente en los últimos 10 años."*
+* Se realizo una prueba t de muestras independientes comparando los precios promedio de los primeros 5 años con los últimos 5 años.
+
+Código:
+```python
+# Filtra los datos para los primeros y últimos 5 años
+primeros_5 = df_tortilla_prices[df_tortilla_prices['Year'].between(2007, 2011)]['Price per kilogram']
+ultimos_5 = df_tortilla_prices[df_tortilla_prices['Year'].between(2020, 2024)]['Price per kilogram']
+# Realiza la prueba t
+t_stat, p_value = ttest_ind(primeros_5, ultimos_5, equal_var=False)
+print(f'Estadístico t: {t_stat:.4f}, Valor p: {p_value}')
+```
+Salida:
+```bash
+Estadístico t: -429.1513, Valor p: 0.0
+```
+El **valor p** de **0.0** proporciona una evidencia estadística muy fuerte para concluir que existe una diferencia significativa en el precio promedio de la tortilla entre los primeros cinco años (2007-2011) y los últimos cinco años (2020-2024) del periodo analizado. El signo negativo del **estadístico t** indica que la media del segundo grupo (los últimos cinco años) es significativamente mayor que la media del primer grupo (los primeros cinco años), lo que respalda la hipótesis de que el precio promedio de la tortilla ha aumentado significativamente en los últimos 10 años.
+
+**Hipótesis 2:** *"En el norte del país los precios son más altos que en el sur (Definir las regiones norte y sur según los estados correspondientes)."*
+* Se realio una prueba t para comparar los precios promedio entre estas dos regiones.
+
+```python
+# Filtra los datos para los primeros y últimos 5 años
+primeros_5 = df_tortilla_prices[df_tortilla_prices['Year'].between(2007, 2011)]['Price per kilogram']
+ultimos_5 = df_tortilla_prices[df_tortilla_prices['Year'].between(2020, 2024)]['Price per kilogram']
+
+# Realiza la prueba t
+t_stat, p_value = ttest_ind(primeros_5, ultimos_5, equal_var=False)
+print(f'Estadístico t: {t_stat:.4f}, Valor p: {p_value}')
+```
+
+```bash
+Estadístico t: -429.1513, Valor p: 0.0
+```
+El **valor p** de **0.0005** proporciona evidencia estadística significativa para concluir que existe una diferencia en el precio promedio de la tortilla entre las regiones norte y sur de México. El signo positivo del **estadístico t** (asumiendo que la media de los precios del norte se colocó como el primer argumento en ttest_ind) sugiere que, en promedio, los precios de la tortilla son significativamente más altos en la región norte en comparación con la región sur, lo que respalda nuestra hipótesis inicial.
+
+### **Factores que podrían influir en el aumento del precio de las tortillas**
 
 El precio de la tortilla en México no es un valor aislado, sino el resultado de una compleja interacción de diversas fuerzas económicas, sociales y políticas. A continuación, exploramos algunos de los factores clave que podrían influir en las diferencias regionales y la tendencia general observada entre 2007 y 2024:
 
@@ -228,19 +267,8 @@ El precio de la tortilla en México no es un valor aislado, sino el resultado de
 
 Un análisis exhaustivo requerirá la exploración de datos sobre estos diversos factores a lo largo del periodo estudiado para identificar correlaciones y posibles relaciones causales.
 
-
-
-4. **Análisis exploratorio de datos (EDA)**:
-   - [Ej. Distribución, correlaciones, agrupaciones, etc.]
-
-5. **Visualización de datos**:
-   - Uso de gráficos de barras, líneas, cajas, dispersión y mapas de calor.
-
-6. **Modelado o reportes (opcional)**:
-   - [Si aplica: modelos de ML, clustering, predicciones, etc.]
-
-7. **Conclusiones y recomendaciones**:
-   - Síntesis de hallazgos clave y propuestas de acción.
+### **Conclusión**
+El análisis confirma que el precio de la tortilla en México ha aumentado consistentemente desde 2007, con una mayor aceleración en la última década. Existen diferencias regionales claras, con precios más elevados en el norte del país. Además, la variabilidad entre estados se ha incrementado, lo que puede reflejar desigualdades económicas, logísticas o políticas en las cadenas de distribución.
 
 ---
 
@@ -258,7 +286,7 @@ Un análisis exhaustivo requerirá la exploración de datos sobre estos diversos
 
 ### 1. Clonar este repositorio:
 ```bash
-git clone https://github.com/tu_usuario/nombre_del_proyecto.git
+git clone https://github.com/SaitoM17/analisis_del_precio_tortillas_mexico_2007_a_2024.git
 ```
 ### 2. Uso de un Entorno Virtual para Aislar Dependencias
 
@@ -292,14 +320,6 @@ python -m venv venv
     ```
     pip install numpy pandas matplotlib seaborn scikit-learn
     ```
----
-
-## 📈 Conclusiones y Recomendaciones
-
-- [Insight 1]
-- [Insight 2]
-- [Recomendación práctica o estratégica basada en los datos]
-
 ---
 
 ## 👤 Autor
