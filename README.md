@@ -206,7 +206,7 @@ El precio promedio mensual de la tortilla, promediado entre 2007 y 2024, present
 
 ### **Formulación y prueba de hipótesis**
 
-**Hipótesis 1:**  *"El precio promedio de la tortilla ha aumentado significativamente en los últimos 10 años."*
+#### **Hipótesis 1:**  *"El precio promedio de la tortilla ha aumentado significativamente en los últimos 10 años."*
 * Se realizo una prueba t de muestras independientes comparando los precios promedio de los primeros 5 años con los últimos 5 años.
 
 Código:
@@ -224,7 +224,7 @@ Estadístico t: -429.1513, Valor p: 0.0
 ```
 El **valor p** de **0.0** proporciona una evidencia estadística muy fuerte para concluir que existe una diferencia significativa en el precio promedio de la tortilla entre los primeros cinco años (2007-2011) y los últimos cinco años (2020-2024) del periodo analizado. El signo negativo del **estadístico t** indica que la media del segundo grupo (los últimos cinco años) es significativamente mayor que la media del primer grupo (los primeros cinco años), lo que respalda la hipótesis de que el precio promedio de la tortilla ha aumentado significativamente en los últimos 10 años.
 
-**Hipótesis 2:** *"En el norte del país los precios son más altos que en el sur (Definir las regiones norte y sur según los estados correspondientes)."*
+#### **Hipótesis 2:** *"En el norte del país los precios son más altos que en el sur (Definir las regiones norte y sur según los estados correspondientes)."*
 * Se realio una prueba t para comparar los precios promedio entre estas dos regiones.
 
 ```python
