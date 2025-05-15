@@ -7,14 +7,14 @@ Este proyecto realiza un análisis [exploratorio / predictivo / descriptivo] de 
 
 ## 📚 Tabla de Contenidos
 
-- [🎯 Propósito](#propósito)
-- [📦 Conjunto de Datos](#conjunto-de-datos)
-- [🧪 Pasos del Proyecto](#pasos-del-proyecto)
-- [🛠️ Tecnologías](#tecnologías)
-- [⚙️ Instalación](#instalación)
-- [🚀 Uso](#uso)
-- [📈 Conclusiones y Recomendaciones](#conclusiones-y-recomendaciones)
-- [👤 Autores](#autores)
+- [🎯 Propósito](#-propósito)
+- [📦 Conjunto de Datos](#-conjunto-de-datos)
+- [🧪 Pasos del Proyecto](#-pasos-del-proyecto)
+- [🛠️ Tecnologías](#-tecnologías)
+- [⚙️ Instalación](#-instalación)
+- [🚀 Uso](#-uso)
+- [📈 Conclusiones y Recomendaciones](#-conclusiones-y-recomendaciones)
+- [👤 Autores](#-autores)
 
 ---
 
