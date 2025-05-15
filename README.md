@@ -162,9 +162,73 @@ Estado      Precio
 Sonora      $21.89
 ```
 
-La dispersión de precios también ha crecido con el tiempo, lo que indica un mercado cada vez más heterogéneo en cuanto a costos.
+Esta visualización resalta los años en los que se produjeron cambios abruptos en el precio promedio de la tortilla. Los picos más altos, correspondientes a 2012, 2017, 2022 y 2023, indican aumentos anuales sustanciales, especialmente notable en 2022. La caída en 2014 señala una disminución en el precio promedio con respecto al año anterior.
 
-Se usaron funciones como .groupby(), .mean() y .std() para obtener promedios y desviaciones estándar por año y por estado, y así facilitar el análisis comparativo.
+![diferencia_anual_precio_promedio_tortilla](reports/figures/diferencia_anual_precio_promedio_tortilla.png)
+
+La tasa de cambio anual del precio promedio de la tortilla muestra una volatilidad considerable a lo largo del periodo. Los incrementos porcentuales más pronunciados se dieron en 2012, 2017, 2022 y 2024, mientras que 2014 experimentó una disminución porcentual. El año 2024 presenta el mayor cambio relativo al año anterior.
+
+![tasa_cambio_anual_precio_promedio_tortilla](reports/figures/tasa_cambio_anual_precio_promedio_tortilla.png)
+
+Para detectar comportamientos inusuales en el precio promedio anual de la tortilla, se utilizaron dos enfoques. El primero, basado en el Rango Intercuartílico (IQR), identificó al año 2024 como un valor significativamente alejado del rango típico. El segundo método, que buscaba valores a más de 2 desviaciones estándar de la media, no encontró ningún año que cumpliera con este criterio de atipicidad.
+
+```python
+Q1 = promedio_anula.quantile(0.25)
+Q3 = promedio_anula.quantile(0.75)
+IQR = Q3 - Q1
+limite_inferior = Q1 - 1.5 * IQR
+limite_superior = Q3 + 1.5 * IQR
+outliers_iqr = promedio_anula[(promedio_anula < limite_inferior) | (promedio_anula > limite_superior)]
+print("Años con precios promedio atípicos (IQR):")
+print(outliers_iqr)
+
+media_precio = promedio_anula.mean()
+desviacion_estandar = promedio_anula.std()
+umbral = 2  # Puedes ajustar este valor
+outliers_std = promedio_anula[abs(promedio_anula - media_precio) > umbral * desviacion_estandar]
+print(f"\nAños con precios promedio que se desvían más de {umbral} desviaciones estándar:")
+print(outliers_std)
+```
+
+```bash
+Años con precios promedio atípicos (IQR):
+Year
+2024    19.564326
+Name: Price per kilogram, dtype: float64
+
+Años con precios promedio que se desvían más de 2 desviaciones estándar:
+Series([], Name: Price per kilogram, dtype: float64)
+```
+
+El precio promedio mensual de la tortilla, promediado entre 2007 y 2024, presenta una variación relativamente suave a lo largo del año. La ausencia de una marcada estacionalidad podría deberse a la producción y disponibilidad continua del maíz y la tortilla a nivel nacional, así como a la influencia de otros factores económicos más dominantes que las posibles fluctuaciones estacionales en la oferta o la demanda.
+
+![precio_promedio_mensual_tortilla_todos_los_años](reports/figures/precio_promedio_mensual_tortilla_todos_los_años.png)
+
+
+El precio de la tortilla en México no es un valor aislado, sino el resultado de una compleja interacción de diversas fuerzas económicas, sociales y políticas. A continuación, exploramos algunos de los factores clave que podrían influir en las diferencias regionales y la tendencia general observada entre 2007 y 2024:
+
+**Factores Macroeconómicos:**
+- Inflación: La tendencia inflacionaria general del país es un impulsor fundamental del aumento de precios en bienes básicos.
+
+**Factores de la Cadena de Suministro:**
+- Precio del Maíz: Las fluctuaciones en los mercados nacionales e internacionales del maíz son un determinante directo del costo de producción.
+- Costos de Producción y Operación: Incluyen energía (gas, electricidad), mano de obra, transporte y alquiler de locales.
+
+**Factores Socioeconómicos y de Seguridad:**
+- Crimen Organizado: La extorsión y la inseguridad pueden añadir costos significativos en ciertas regiones.
+- Poder Adquisitivo del Consumidor: Aunque no causa directamente el aumento de precios, influye en la demanda y la capacidad de los consumidores para absorberlos.
+
+**Factores Políticos y Regulatorios:**
+- Políticas Agrícolas y Subsidios: Las decisiones gubernamentales en este ámbito pueden afectar la oferta y el precio del maíz.
+- Regulaciones de Precios: Aunque limitadas, cualquier intervención gubernamental podría influir.
+
+**Factores de Mercado:**
+- Tipo de Tienda y Márgenes: Las diferencias en las estructuras de costos y las estrategias de precios entre los diferentes tipos de establecimientos.
+- Oferta y Demanda Regional: Las condiciones locales pueden generar variaciones de precios entre estados.
+
+Un análisis exhaustivo requerirá la exploración de datos sobre estos diversos factores a lo largo del periodo estudiado para identificar correlaciones y posibles relaciones causales.
+
+
 
 4. **Análisis exploratorio de datos (EDA)**:
    - [Ej. Distribución, correlaciones, agrupaciones, etc.]
