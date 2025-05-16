@@ -203,6 +203,7 @@ El precio promedio mensual de la tortilla, promediado entre 2007 y 2024, present
 ![precio_promedio_mensual_tortilla_todos_los_años](reports/figures/precio_promedio_mensual_tortilla_todos_los_años.png)
 
 ![distribucion_precio_tortilla_por_mes](reports/figures/distribucion_precio_tortilla_por_mes.png)
+***Archivo: 3_analisis_tortilla_prices.ipynb***
 
 ### **Formulación y prueba de hipótesis**
 
@@ -241,6 +242,7 @@ print(f'Estadístico t: {t_stat:.4f}, Valor p: {p_value}')
 Estadístico t: -429.1513, Valor p: 0.0
 ```
 El **valor p** de **0.0005** proporciona evidencia estadística significativa para concluir que existe una diferencia en el precio promedio de la tortilla entre las regiones norte y sur de México. El signo positivo del **estadístico t** (asumiendo que la media de los precios del norte se colocó como el primer argumento en ttest_ind) sugiere que, en promedio, los precios de la tortilla son significativamente más altos en la región norte en comparación con la región sur, lo que respalda nuestra hipótesis inicial.
+***Archivo: 4_estadística_descriptiva.ipynb***
 
 ### **Factores que podrían influir en el aumento del precio de las tortillas**
 
@@ -266,6 +268,7 @@ El precio de la tortilla en México no es un valor aislado, sino el resultado de
 - Oferta y Demanda Regional: Las condiciones locales pueden generar variaciones de precios entre estados.
 
 Un análisis exhaustivo requerirá la exploración de datos sobre estos diversos factores a lo largo del periodo estudiado para identificar correlaciones y posibles relaciones causales.
+***Archivo: 3_analisis_tortilla_prices.ipynb***
 
 ### **Conclusión**
 El análisis confirma que el precio de la tortilla en México ha aumentado consistentemente desde 2007, con una mayor aceleración en la última década. Existen diferencias regionales claras, con precios más elevados en el norte del país. Además, la variabilidad entre estados se ha incrementado, lo que puede reflejar desigualdades económicas, logísticas o políticas en las cadenas de distribución.
